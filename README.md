@@ -3,21 +3,20 @@
 ## これはなに
 
 [koshian](http://www.m-pression.com/ja/solutions/boards/koshian)をPCからArduinoのようにPythonから制御する
-ライブラリです。現時点では Ubuntu14.04 でしか動きません。
+ライブラリです。現時点では Linuxでしか動きません。Ubuntu14.04 で動作確認をしています。
 
 ## インストール
 
 koshian,pyのインストールの前に [pygattlib](https://bitbucket.org/OscarAcena/pygattlib) を
-インストールしてください。インストール方法はリンク先を参照のこと。しかるのちに下記です。
+インストールしてください。インストール方法はリンク先を参照のこと。しかるのちに下記でインストールできます。
 
 > python ./setup.py install
 
 ## ハードウェアの準備
 
-konashi.jsアプリを使ってkoshianのファームをkonashi2.0にアップデートします。
+konashi.jsアプリを使ってkoshianのファームをkonashi2.0にアップデートしておきます。
 
 ## 使用例
-
 
 ### Lチカ
 ```python
@@ -42,16 +41,17 @@ from koshian import *
 
 class myKoshian(Koshian):
     def setup(self):    
-        s=Servo(self)
-        s.attach(PIO2)
+        self.s=Servo(self)
+        self.s.attach(PIO2)
     def loop(self):
-        s.write(30)
+        self.s.write(30)
         delay(1000)
-        s.write(90)
+        self.s.write(90)
         delay(1000)
 
 k= myKoshian()
 k.run()
+
 ```
 
 ### 自動検出とMACアドレス指定

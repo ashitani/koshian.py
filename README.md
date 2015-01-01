@@ -12,11 +12,11 @@ koshian,pyのインストールの前に [pygattlib](https://bitbucket.org/Oscar
 
 > python ./setup.py install
 
-## ハードウェア
+## ハードウェアの準備
 
 konashi.jsアプリを使ってkoshianのファームをkonashi2.0にアップデートします。
 
-## 例
+## 使用例
 
 ### MACアドレス指定
 ```python
@@ -32,28 +32,7 @@ MAC アドレスは下記のコマンドでスキャンできます。
 もしhcitoolが見つからなければ、[blueZ](http://www.bluez.org/)をインストールしてください。
 
 
-### 自動検出
-
-```python
-from koshian import *
-k= Koshian()
-k.pinMode(PIO5,OUTPUT)
-k.digitalWrite(PIO5,HIGH)
-```
-
-自動検出にはsudoでスクリプトを実行する必要があります。
-
-### 普通のコーディング
-
-```python
-from koshian import *
-mac = "00:00:00:00:00:00"
-k= Koshian(mac)
-k.pinMode(PIO5,OUTPUT)
-k.digitalWrite(PIO5,HIGH)
-```
-
-### Arduino風コーディング
+### Lチカ
 ```python
 from koshian import *
 
@@ -70,15 +49,53 @@ k= myKoshian()
 k.run()
 ```
 
-### サーボの例（Servo example)
+### サーボ
 ```python
 from koshian import *
 
+class myKoshian(Koshian):
+    def setup(self):    
+        s=Servo(self)
+        s.attach(PIO2)
+    def loop(self):
+        s.write(30)
+        delay(1000)
+        s.write(90)
+        delay(1000)
+
+k= myKoshian()
+k.run()
+```
+
+### 自動検出
+
+引数を付けずに呼び出すと自動検出します。
+
+```python
+from koshian import *
+k= Koshian()
+
+```
+
+自動検出にはsudoでスクリプトを実行する必要があります。
+
+### 非Arduino風コーディング
+
+```python
+from koshian import *
+k= Koshian()
+k.pinMode(PIO5,OUTPUT)
+k.digitalWrite(PIO5,HIGH)
+```
+
+```python
+from koshian import *
 k= Koshian()
 s= Servo(k)
 s.attach(PIO2)
 s.write(30)
 ```
+
 
 ### I2Cの例
 

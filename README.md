@@ -1,35 +1,24 @@
-# koshian.py (Koshian-Pie)
+# koshian.py (こしあんパイ)
 
-## これはなに(What's This)
+## これはなに
 
 [koshian](http://www.m-pression.com/ja/solutions/boards/koshian)をPCからArduinoのようにPythonから制御する
 ライブラリです。現時点では Ubuntu14.04 でしか動きません。
 
-Python library to control [koshian](http://www.m-pression.com/ja/solutions/boards/koshian) like Arduino from PC.
-At this time, only Ubuntu 14.04 is supported.
-
-
-## インストール(Install)
+## インストール
 
 koshian,pyのインストールの前に [pygattlib](https://bitbucket.org/OscarAcena/pygattlib) を
 インストールしてください。インストール方法はリンク先を参照のこと。しかるのちに、
 
 > python ./setup.py install
 
-Before installing koshian,py, [pygattlib](https://bitbucket.org/OscarAcena/pygattlib) should be instelled. See the instruction on the Link. After that,
-
-> python ./setup.py install
-
-## ハードウェア（Hardware Setting）
+## ハードウェア
 
 konashi.jsアプリを使ってkoshianのファームをkonashi2.0にアップデートします。
 
-Update koshian firmware to konashi2.0 by konashi.js application.
+## 例
 
-
-## 例（Example）
-
-### MACアドレス指定（Connection by assigning MAC address）
+### MACアドレス指定
 ```python
 from koshian import *
 mac = "00:00:00:00:00:00"
@@ -42,13 +31,9 @@ MAC アドレスは下記のコマンドでスキャンできます。
 
 もしhcitoolが見つからなければ、[blueZ](http://www.bluez.org/)をインストールしてください。
 
-MAC address can be scanned by this command (only Linux).
 
-> sudo hcitool lescan
+### 自動検出
 
-If your linux system doesn't have hcitool, install [blueZ](http://www.bluez.org/).
-
-### 自動検出（Automatic Find）
 ```python
 from koshian import *
 k= Koshian()
@@ -58,9 +43,8 @@ k.digitalWrite(PIO5,HIGH)
 
 自動検出にはsudoでスクリプトを実行する必要があります。
 
-You should "sudo" to find devices.
+### 普通のコーディング
 
-### 普通のコーディング（Normal Cording)
 ```python
 from koshian import *
 mac = "00:00:00:00:00:00"
@@ -69,7 +53,7 @@ k.pinMode(PIO5,OUTPUT)
 k.digitalWrite(PIO5,HIGH)
 ```
 
-### Arduino風コーディング（Arduino Style Coding）
+### Arduino風コーディング
 ```python
 from koshian import *
 
@@ -96,13 +80,13 @@ s.attach(PIO2)
 s.write(30)
 ```
 
-### I2Cの例 （I2C example)
+### I2Cの例
 
-now under debugging..
+I2Cはまだデバッグ中です。。
 
-### UARTの例 （UART example)
+### UARTの例
 
-now under debugging..
+UARTはまだデバッグ中です。。
 
 
 ## License

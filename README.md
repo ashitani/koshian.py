@@ -8,7 +8,7 @@
 ## インストール
 
 koshian,pyのインストールの前に [pygattlib](https://bitbucket.org/OscarAcena/pygattlib) を
-インストールしてください。インストール方法はリンク先を参照のこと。しかるのちに、
+インストールしてください。インストール方法はリンク先を参照のこと。しかるのちに下記です。
 
 > python ./setup.py install
 
@@ -17,19 +17,6 @@ koshian,pyのインストールの前に [pygattlib](https://bitbucket.org/Oscar
 konashi.jsアプリを使ってkoshianのファームをkonashi2.0にアップデートします。
 
 ## 使用例
-
-### MACアドレス指定
-```python
-from koshian import *
-mac = "00:00:00:00:00:00"
-k= Koshian(mac)
-```
-
-MAC アドレスは下記のコマンドでスキャンできます。
-
-> sudo hcitool lescan
-
-もしhcitoolが見つからなければ、[blueZ](http://www.bluez.org/)をインストールしてください。
 
 
 ### Lチカ
@@ -67,17 +54,31 @@ k= myKoshian()
 k.run()
 ```
 
-### 自動検出
+### 自動検出とMACアドレス指定
 
-引数を付けずに呼び出すと自動検出します。
+引数を付けずに呼び出すとkoshianを自動検出します。
 
 ```python
 from koshian import *
 k= Koshian()
 
 ```
+ただし、自動検出にはsudoでスクリプトを実行する必要があります。
 
-自動検出にはsudoでスクリプトを実行する必要があります。
+MACアドレスを直接指定する場合は下記のようにします。
+
+```python
+from koshian import *
+mac = "00:00:00:00:00:00"
+k= Koshian(mac)
+```
+
+MAC アドレスは下記のコマンドでスキャンできます。
+
+> sudo hcitool lescan
+
+もしhcitoolが見つからなければ、[blueZ](http://www.bluez.org/)をインストールしてください。
+
 
 ### 非Arduino風コーディング
 
@@ -96,6 +97,7 @@ s.attach(PIO2)
 s.write(30)
 ```
 
+こちらのほうがself地獄にならなくてスッキリするかもしれません。
 
 ### I2Cの例
 
